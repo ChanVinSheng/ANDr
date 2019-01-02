@@ -53,10 +53,10 @@
             android:parentActivityName=".MainMenu" />
         <activity android:name=".Announcement.AnnouncementList" />
         <activity android:name=".Announcement.AnnouncementDetail" />
-        <activity android:name=".NearbyMap.navigationMenu"
-            android:parentActivityName=".MainMenu"/>
+        <activity android:name=".NearbyMap.navigationMenu"/>
         <activity android:name=".NearbyMap.page2"
             android:parentActivityName=".NearbyMap.navigationMenu"/>
+        <activity android:name=".FixLocation.FixedLocationRecycle"/>
     </application>
 
 </manifest>

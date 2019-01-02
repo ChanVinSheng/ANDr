@@ -49,7 +49,9 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, mLocationNames.get(i), Toast.LENGTH_SHORT).show();
+                Intent placeintent = new Intent(mContext,FixMap.class);
+                placeintent.putExtra("placename",mLocationNames.get(i).toString());
+                mContext.startActivity(placeintent);
             }
         });
     }

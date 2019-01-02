@@ -68,6 +68,16 @@ ImageButton ibBus,ibBank,ibRest,ibGas,ibHotel,ibShop;
                 startActivity(mapIntent);
             }
         });
+        ibBank = (ImageButton) findViewById(R.id.ibBank);
+        ibBank.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri gmmIntentUri = Uri.parse("geo:"+position+"?q=Bank");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                startActivity(mapIntent);
+            }
+        });
+
 
     }
 }

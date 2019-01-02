@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.example.vin.myapplication.FixLocation.FixedLocationRecycle;
 import com.example.vin.myapplication.MAP.MapsActivity;
 import com.example.vin.myapplication.NearbyMap.navigationMenu;
 
@@ -36,6 +37,15 @@ public class Place extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(), MapsActivity.class));
+            }
+        });
+
+        ImageView myButton3 = (ImageView) view.findViewById(R.id.placetop);
+        myButton3.setClickable(true);
+        myButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), FixedLocationRecycle.class));
             }
         });
 

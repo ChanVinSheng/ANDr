@@ -2,6 +2,7 @@ package com.example.vin.myapplication.FixLocation;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -35,7 +36,6 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 
-
 public class FixMap extends AppCompatActivity implements OnMapReadyCallback,
         TaskLoadedCallback,
         GoogleApiClient.ConnectionCallbacks,
@@ -45,7 +45,8 @@ public class FixMap extends AppCompatActivity implements OnMapReadyCallback,
     private MarkerOptions place1, place2;
     Button getDirection;
     private Polyline currentPolyline;
-    private double longitude , latitude;
+    private double longitude, latitude;
+    private double place2Long, place2Lat;
     private static final int Request_User_Location_Code = 99;
     private GoogleApiClient googleApiClient;
     private Location lastLocation;
@@ -58,24 +59,53 @@ public class FixMap extends AppCompatActivity implements OnMapReadyCallback,
         setContentView(R.layout.fixmap_activity);
         checkUserLocationPermission();
 
-        LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         boolean network_enabled = locManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
         Location location;
 
-        if(network_enabled){
+        if (network_enabled) {
 
             location = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
-            if(location!=null){
+            if (location != null) {
                 longitude = location.getLongitude();
                 latitude = location.getLatitude();
             }
         }
         place1 = new MarkerOptions().position(new LatLng(latitude, longitude)).title("Your Location");
+        //place2 = new MarkerOptions().position(new LatLng(3.1488643, 101.7113022)).title("Destination");
+        String newString;
+        Intent intent = getIntent();
+        newString = intent.getStringExtra("placename");
+        if (newString.equals("Pavilion")) {
+            place2 = new MarkerOptions().position(new LatLng(3.1488643, 101.7113022)).title("Destination");
+            place2Lat = 3.1488643;
+            place2Long = 101.7113022;
 
-        place2 = new MarkerOptions().position(new LatLng(3.1944475, 101.6783867)).title("Destination");
+        } else if (newString.equals("Petronas Towers")) {
+            place2 = new MarkerOptions().position(new LatLng(3.1574851, 101.7099022)).title("Destination");
+            place2Lat = 3.1574851;
+            place2Long = 101.7099022;
+        } else if (newString.equals("Titiwangsa Lake Garden")) {
+            place2 = new MarkerOptions().position(new LatLng(3.1775567, 101.6971708)).title("Destination");
+            place2Lat = 3.1775567;
+            place2Long = 101.6971708;
+        } else if (newString.equals("Batu Cave")) {
+            place2 = new MarkerOptions().position(new LatLng(3.2374599, 101.6817347)).title("Destination");
+            place2Lat = 3.2374599;
+            place2Long = 101.6817347;
+        } else if (newString.equals("Genting Highland")) {
+            place2 = new MarkerOptions().position(new LatLng(3.3982022, 101.7481935)).title("Destination");
+            place2Lat = 3.3982022;
+            place2Long = 101.7481935;
+        } else if (newString.equals("Merdeka Square")) {
+            place2Lat = 3.3982022;
+            place2Long = 101.7481935;
+        }
+
+
         MapFragment mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.mapNearBy);
         mapFragment.getMapAsync(this);
@@ -91,8 +121,8 @@ public class FixMap extends AppCompatActivity implements OnMapReadyCallback,
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
-                LatLng move = new LatLng(latitude,longitude);
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(move,14));
+                LatLng move = new LatLng(place2Lat, place2Long);
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(move, 14));
             }
         });
 

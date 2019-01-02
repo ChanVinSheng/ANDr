@@ -8,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
+import com.example.vin.myapplication.FixLocation.FixedLocationRecycle;
 import com.example.vin.myapplication.MAP.MapsActivity;
+import com.example.vin.myapplication.MainMenu;
 import com.example.vin.myapplication.R;
 
 import java.util.ArrayList;
@@ -58,6 +61,24 @@ String tempPosition,tempPlace;
             }
         });
 
+    }
+
+    public void onBackPressed()
+    {
+
+        Intent intent = new Intent(navigationMenu.this,MainMenu.class);
+
+        intent.putExtra("Check",1);
+        startActivity(intent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
